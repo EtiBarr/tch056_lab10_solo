@@ -78,10 +78,12 @@ try {
     echo "Connexion réussie avec PDO!";
 
 
+    /*
 // Perform a test query
     $test = "SELECT * FROM utilisateurs";
     $resultTest = $conn->query($test);
 
+    
     //test to see if queury worked
     if ($resultTest !== false) {
         // Fetch and print the results
@@ -91,6 +93,7 @@ try {
         // Print an error message if the query failed
         die("Erreur lors de l'exécution de la requête: " . $conn->errorInfo()[2]);
     }
+*/
 
 }   catch(PDOException $e) {// Arrêter le script si la connexion échoue
     die("Connexion échouée: " . $e->getMessage());

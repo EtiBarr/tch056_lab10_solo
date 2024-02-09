@@ -88,3 +88,153 @@ function updateCharCount(textarea) {
     var charCountElement = document.getElementById('charCount');
     charCountElement.textContent = 'Characters remaining: ' + remainingLength;
 }
+
+
+
+//validation of password when registering
+document.addEventListener("DOMContentLoaded", function() {
+
+    // Add event listener to the form submission
+    document.getElementById("registrationForm").addEventListener("submit", function(event) {
+        
+        var password = document.getElementById("reg-password").value;
+
+        // Define regular expressions for each password criteria
+        var hasLowerCase = /[a-z]/.test(password);
+        var hasUpperCase = /[A-Z]/.test(password);
+        var hasDigit = /\d/.test(password);
+        var hasSymbol = /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/.test(password);
+
+        // Check if all criteria are met
+        if(password != document.getElementById("confirm-password").value) {
+            alert("Both passwords have to be the same!");
+            event.preventDefault(); // Prevent form submission if validation fails
+        }else if (password.length >= 8 && hasLowerCase && hasUpperCase && hasDigit && hasSymbol) {
+            //where we will create the login
+            return true;
+        } else {
+            event.preventDefault(); // Prevent form submission if validation fails
+            alert("Password must have at least 8 characters, including one lowercase letter, one uppercase letter, one digit, and one symbol.");
+            return false;
+        }
+
+    });
+});
+
+//end of registration password validation 
+
+
+
+//validation login
+
+document.addEventListener("DOMContentLoaded", function() {
+    
+    document.getElementById('login-button').addEventListener('click', function() {
+
+        // Récupérer le contenu du champ de saisie
+        const valeurUser = document.getElementById('username').value;
+        const valeurPsw = document.getElementById('password').value;
+
+        // Vérifier si le champ de saisie est vide
+        if (valeurUser === '' || valeurPsw === '') {
+            alert('Veuillez saisir un Username et un mot de passe');
+            return;
+        }
+    
+        // Création d'une nouvelle instance de XMLHttpRequest
+        const requete = new XMLHttpRequest();
+
+        // Configuration de la requête post vers index.php
+        requete.open('POST', '/scripts/index.php', true);
+
+        // Définition de l'en-tête de la requête pour spécifier le type de contenu
+        requete.setRequestHeader('Content-Type', 'application/json');
+
+        // Définition des données JSON à envoyer dans la requête
+        const requeteJSON = JSON.stringify({
+            "valeurUser": valeurUser,
+            "valeurPsw": valeurPsw
+        });
+
+        // Définition de la fonction à exécuter une fois la requête terminée
+        requete.onreadystatechange = function () {
+
+        // Vérification si la requête est terminée (readyState === 4)
+        // et si le statut de la réponse est 200 - OK
+        if (requete.readyState === 4 && requete.status === 200) {
+
+            // Traitement de la réponse reçue du serveur
+            const valeur = JSON.parse(requete.responseText);  
+
+            // Afficher le résultat dans la page
+            if (valeur['success'] !== null) {
+                elementResultat.value = 'success';
+            } else {
+                elementResultat.value = 'verification n\'est pas valide';
+            }
+
+        }
+
+    };
+
+    // Envoi de la requête
+    requete.send(requeteJSON);
+
+});
+
+});
+
+
+
+
+
+
+
+/*
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById('login-button').addEventListener('click', function (event) {
+        const valeurUser = document.getElementById('username').value;
+        const valeurPsw = document.getElementById('password').value;
+
+        if (valeurUser === '' || valeurPsw === '') {
+            alert('Veuillez saisir un Username et un mot de passe');
+            return;
+        }
+
+        const requete = new XMLHttpRequest();
+        requete.open('POST', 'login.php', true);
+        requete.setRequestHeader('Content-Type', 'application/json');
+
+        const jsonData = JSON.stringify({
+            valeurUser: valeurUser,
+            valeurPsw: valeurPsw
+        });
+
+        requete.onreadystatechange = function () {
+            if (requete.readyState === 4) {
+                if (requete.status === 200) {
+                    const response = JSON.parse(requete.responseText);
+
+                    const elementResultat = document.getElementById('resultat');
+                    if (response['success']) {
+                        // Redirect to the next page if login is successful
+                        window.location.href = 'next_page.html';
+                    } else {
+                        elementResultat.value = 'Erreur lors de l\'authentification';
+                        
+                        // Prevent form submission when login fails
+                        event.preventDefault();
+                    }
+                } else {
+                    console.error('Erreur de la requête: ' + requete.status);
+                }
+            }
+        };
+
+        requete.send(jsonData);
+    });
+});
+*/
