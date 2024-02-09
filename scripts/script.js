@@ -9,6 +9,7 @@ may_elizabeth
 
 */
 
+
 document.addEventListener('DOMContentLoaded', function () {
     
 
@@ -23,9 +24,11 @@ document.addEventListener('DOMContentLoaded', function () {
         toggleButton.innerText = isCollapsed ? '➕' : '➖';
     });
 
+});
 
 
 //color toggle function
+document.addEventListener('DOMContentLoaded', function () {
     const toggleButton = document.getElementById("themeToggle");
 
     const elementsToToggle = [
@@ -84,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const newSrc = isLightMode ? "/images/plain_logo_white.png" : "/images/plain_logo.png";
         imageElement.setAttribute("src", newSrc);
     }
-
+});
 
 
 
@@ -101,7 +104,9 @@ function updateCharCount(textarea) {
 
 
 
+
 //validation of password when registering
+document.addEventListener('DOMContentLoaded', function () {
 
     // Add event listener to the form submission
     document.getElementById("registrationForm").addEventListener("submit", function(event) {
@@ -128,6 +133,7 @@ function updateCharCount(textarea) {
         }
 
     });
+});
 
 //end of registration password validation 
 
@@ -135,7 +141,8 @@ function updateCharCount(textarea) {
 
 //validation login
 
-    
+document.addEventListener('DOMContentLoaded', function () {
+
     document.getElementById('login-button').addEventListener('click', function() {
 
         // Récupérer le contenu du champ de saisie
@@ -189,13 +196,20 @@ function updateCharCount(textarea) {
 
 });
 
+});
+
+//latest push is after this
 
 
 
+
+//problem is here
+
+document.addEventListener('DOMContentLoaded', function () {
+    function getMessage(){
 
 
 //adding new posts from db to forum
-    function getMessage(){
     document.getElementById('test').addEventListener('click', function() {
 
 
@@ -240,12 +254,33 @@ function updateCharCount(textarea) {
     });
 }
 
+});
+
 
 //end of adding posts from db to forum
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 //adding new post to database and posting it
+document.addEventListener('DOMContentLoaded', function () {
 document.getElementById('blogSubmit').addEventListener('click', function() {
 
     // Récupérer le contenu du champ de saisie
@@ -259,7 +294,6 @@ document.getElementById('blogSubmit').addEventListener('click', function() {
 
     const axios = require('axios');
 
-    
     // Envoi de la requête avec axios
     axios.post('http://localhost:1234/api/postMessage.php/postMessage', {valeur})
         .then(function(reponse) {
@@ -277,13 +311,9 @@ document.getElementById('blogSubmit').addEventListener('click', function() {
 
 });
 
+});
 
 //end of adding new post to database
 
 
-
-
-
-});
-
-
+*/

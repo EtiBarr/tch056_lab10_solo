@@ -95,19 +95,20 @@
     
         <content > 
             <h1>Welcome to the blog page!</h1>
-            <button id="test">Test</button>
 
             <div class="contact-container">
                 <form action="#" method="post">
                     
                     <div class="form-group">
                         <label for="message">Your Message:</label>
-                        <textarea id="contactMessage" name="message" rows="4" maxlength="250" oninput="updateCharCount(this)"required></textarea>
+                        <textarea id="blogMessage" name="message" rows="4" maxlength="250" oninput="updateCharCount(this)"required></textarea>
                         <div id="charCount">Characters remaining: 250</div>
                     </div>
-                    <button type="delete" class="submit-button" id="blogSubmit">Submit</button>
-                    <button type="submit" class="submit-button" id="blogDelete">Delete</button>
-
+                    <div>
+                        <button type="delete" class="submit-button" id="blogSubmit">Submit</button>
+                        <button type="submit" class="submit-button" id="blogDelete">Delete</button>    
+                    </div>
+                    
                 </form>
             </div>
 
@@ -115,8 +116,8 @@
 
                 <div class="contact-container">
                     <div class="form-group">
-                        <textarea id="contactMessage" name="message" rows="4" readonly></textarea>
-                        <div id="charCount">Post Written by:<p></p>Date de Publication<p></p></div>
+                        <textarea class="contactMessage" name="message" rows="4" readonly></textarea>
+                        <div id="charCount">Post Written by:<p></p>Date de Publication:<p></p></div>
                     </div>
                 </div>
                 

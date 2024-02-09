@@ -352,14 +352,18 @@ body.light #collapseBtn:hover {
     border-radius: 2em;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     text-align: center;
-    margin-right: 8em;
     color: #000000;
-    width: 75vmin;
-    margin-bottom: 5vmin;
+    width: 100vmin;
+    margin-top: 10vmin;
+}
+
+content h1{
+    margin-top:10vmin;
 }
 
 .contact-container h2 {
     color: #333;
+    margin-left: 20vmin;
 }
 
 .form-group {
@@ -373,6 +377,8 @@ body.light #collapseBtn:hover {
 }
 
 .form-group input,
+.contactMessage,
+#blogMessage,
 #contactMessage,
 #blogMessage {
     width: 100%;
