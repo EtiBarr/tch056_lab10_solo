@@ -1,4 +1,64 @@
 <?php
+session_start();
+
+// Check if the user has submitted the login form
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Assuming you have a form with fields 'username' and 'password'
+    $username = $_POST["username"];
+    $password = $_POST["password"];
+
+    // TODO: Implement your actual authentication logic here
+    // You should verify the username and password against your database
+
+    // For example, check if the username and password match
+    if ($username === "your_username" && $password === "your_password") {
+        // Password is correct, set the user identifier in the session
+        $_SESSION["user_id"] = $username;
+
+        // Redirect the user to the desired page (e.g., forum.php)
+        header("Location: forum.php");
+        exit();
+    } else {
+        // Password is incorrect, you might want to handle this case accordingly
+        echo "Invalid username or password.";
+    }
+}
+?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<?php
 /*
         include 'en-tete.html';
 
