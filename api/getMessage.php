@@ -1,6 +1,5 @@
 <?php
 
-require_once('connexion.php');
 
 if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'GET') {
 
@@ -8,6 +7,9 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'GET') {
     if (preg_match('/\/api\/getMessage\.php\/getMessage$/', $_SERVER['REQUEST_URI'], $matches)) {
 
     try {
+
+        require_once('connexion.php');
+
         // validate that the connection has been established
         if ($conn != null) {
             $requete = "SELECT * FROM messages";
@@ -18,11 +20,14 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'GET') {
     
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 $messageData = [
-                    'username' => $row['auteur'], // Assuming 'username' is the column name in the messages table
-                    'message' => $row['contenue'],   // Adjust accordingly based on your table structure
-                    'date' => $row['date_publication'],
+                    'titre' => $row['titre'],
+                    'username' => $row['auteur'], 
+                    'message' => $row['contenue'],  
+                    'date' => $row['date_publication']
                 ];
     
+                    echo $messageData;
+
                 $messages[] = $messageData; // Add each row to the messages array
             }
     
@@ -38,7 +43,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'GET') {
 } else {
 
     // Code HTTP 405 - Method Not Allowed
-    echo json_encode(['erreur' => 'Méthode non autorisée.',
+    echo json_encode(['erreur' => 'Methode non autorisée.',
                     'code' => 405]);
 
 }} else { 

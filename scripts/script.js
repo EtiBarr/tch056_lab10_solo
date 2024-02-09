@@ -104,7 +104,6 @@ function updateCharCount(textarea) {
 
 
 
-
 //validation of password when registering
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -154,9 +153,6 @@ document.addEventListener('DOMContentLoaded', function () {
             alert('Veuillez saisir un Username et un mot de passe');
             return;
         }
-    
-        // Création d'une nouvelle instance de XMLHttpRequest
-        const requete = new XMLHttpRequest();
 
         // Configuration de la requête post vers index.php
         requete.open('POST', '/scripts/index.php', true);
@@ -186,9 +182,7 @@ document.addEventListener('DOMContentLoaded', function () {
             } else {
                 elementResultat.value = 'verification n\'est pas valide';
             }
-
         }
-
     };
 
     // Envoi de la requête
@@ -198,18 +192,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
 });
 
-//latest push is after this
-
-
-
-
-//problem is here
-
-document.addEventListener('DOMContentLoaded', function () {
-    function getMessage(){
 
 
 //adding new posts from db to forum
+document.addEventListener('DOMContentLoaded', function () {
+    function getMessage(){
     document.getElementById('test').addEventListener('click', function() {
 
 
@@ -226,6 +213,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         const message = messages.message;
                         const date = messages.date;
         
+                        //select parent and print out the new child which contains everything
                     let parent = $("#blogSpace");
                     let nouvelleCellule = $('<div class="contact-container"></div>');
 
@@ -239,20 +227,17 @@ document.addEventListener('DOMContentLoaded', function () {
             parent.append(nouvelleCellule);
 
                 });
-
                 } else {
                     // Handle the case when there are no messages
                     console.error('Erreur: No messages found');
                 }
-        
                 console.log(response.data);
             })
             .catch(function (error) {
                 console.error('Erreur lors de l\'appel à l\'API', error);
             });
-        
     });
-}
+    }
 
 });
 
@@ -261,30 +246,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
 //adding new post to database and posting it
 document.addEventListener('DOMContentLoaded', function () {
-document.getElementById('blogSubmit').addEventListener('click', function() {
+    document.getElementById('blogSubmit').addEventListener('click', function() {
 
     // Récupérer le contenu du champ de saisie
-    const valeur = document.getElementById('blogMessage').value;
+    const valeur = document.querySelector('#blogMessage').value;
 
     // Vérifier si le champ de saisie est vide
     if (valeur === '') {
@@ -297,10 +264,9 @@ document.getElementById('blogSubmit').addEventListener('click', function() {
     // Envoi de la requête avec axios
     axios.post('http://localhost:1234/api/postMessage.php/postMessage', {valeur})
         .then(function(reponse) {
-
-            const reponse = reponse.data.reponse;
-            if (reponse === 'Success') {
-                getMessage()
+            const reponsePost = reponse.data.reponse;
+            if (reponsePost === 'Success') {
+                getMessage();
             } else {
                 alert('Erreur lors de l\'appel à l\'API');
             }
@@ -308,12 +274,11 @@ document.getElementById('blogSubmit').addEventListener('click', function() {
         .catch(function(error) {
             console.error('Erreur lors de la requête:', error);
         });
-
-});
+    });
 
 });
 
 //end of adding new post to database
 
 
-*/
+
