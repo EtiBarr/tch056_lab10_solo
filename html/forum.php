@@ -116,7 +116,7 @@
                 <div class="contact-container">
                     <div class="form-group">
                         <textarea id="contactMessage" name="message" rows="4" readonly></textarea>
-                        <div id="charCount">Post Written by:<p></p>Date de Publication<p></p></div>
+                        <div id="charCount">Post Written by:<p></p></div>
                     </div>
                 </div>
                 

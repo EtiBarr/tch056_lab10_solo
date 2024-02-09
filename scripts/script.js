@@ -1,4 +1,17 @@
+/*
+usernames 
+
+yUBe3Sdf
+mUdWCNWu
+ngn55Z9Z
+may_elizabeth
+4BtQRkxn
+
+*/
+
 document.addEventListener('DOMContentLoaded', function () {
+    
+
     var toggleButton = document.getElementById('collapseBtn');
     var aside = document.querySelector('aside');
     var content = document.querySelector('content');
@@ -9,12 +22,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
         toggleButton.innerText = isCollapsed ? '➕' : '➖';
     });
-});
 
 
 
 //color toggle function
-document.addEventListener("DOMContentLoaded", function () {
     const toggleButton = document.getElementById("themeToggle");
 
     const elementsToToggle = [
@@ -73,7 +84,6 @@ document.addEventListener("DOMContentLoaded", function () {
         const newSrc = isLightMode ? "/images/plain_logo_white.png" : "/images/plain_logo.png";
         imageElement.setAttribute("src", newSrc);
     }
-});
 
 
 
@@ -92,7 +102,6 @@ function updateCharCount(textarea) {
 
 
 //validation of password when registering
-document.addEventListener("DOMContentLoaded", function() {
 
     // Add event listener to the form submission
     document.getElementById("registrationForm").addEventListener("submit", function(event) {
@@ -119,7 +128,6 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
     });
-});
 
 //end of registration password validation 
 
@@ -127,7 +135,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
 //validation login
 
-document.addEventListener("DOMContentLoaded", function() {
     
     document.getElementById('login-button').addEventListener('click', function() {
 
@@ -182,59 +189,101 @@ document.addEventListener("DOMContentLoaded", function() {
 
 });
 
-});
 
 
 
 
 
+//adding new posts from db to forum
+    function getMessage(){
+    document.getElementById('test').addEventListener('click', function() {
 
 
-/*
+        const axios = require('axios');
+
+        axios.get('http://localhost:1234/api/getMessage.php')
+            .then(function (response) {
+
+                const messagesArray = response.data.messages;
+        
+                if ( messagesArray.length > 0) {
+                    messagesArray.forEach((messages) => {
+                        const username = messages.username;
+                        const message = messages.message;
+                        const date = messages.date;
+        
+                    let parent = $("#blogSpace");
+                    let nouvelleCellule = $('<div class="contact-container"></div>');
+
+                    nouvelleCellule.html(`
+                        <div class="form-group">
+                            <textarea class="contactMessage" name="message" rows="4" readonly>${message}</textarea>
+                            <div id="charCount">Post Written by:<p>${username}</p>>Date de Publication<p>${date}</p></div>
+                        </div>
+                    `);
+    
+            parent.append(nouvelleCellule);
+
+                });
+
+                } else {
+                    // Handle the case when there are no messages
+                    console.error('Erreur: No messages found');
+                }
+        
+                console.log(response.data);
+            })
+            .catch(function (error) {
+                console.error('Erreur lors de l\'appel à l\'API', error);
+            });
+        
+    });
+}
+
+
+//end of adding posts from db to forum
 
 
 
-document.addEventListener("DOMContentLoaded", function () {
-    document.getElementById('login-button').addEventListener('click', function (event) {
-        const valeurUser = document.getElementById('username').value;
-        const valeurPsw = document.getElementById('password').value;
+//adding new post to database and posting it
+document.getElementById('blogSubmit').addEventListener('click', function() {
 
-        if (valeurUser === '' || valeurPsw === '') {
-            alert('Veuillez saisir un Username et un mot de passe');
-            return;
-        }
+    // Récupérer le contenu du champ de saisie
+    const valeur = document.getElementById('blogMessage').value;
 
-        const requete = new XMLHttpRequest();
-        requete.open('POST', 'login.php', true);
-        requete.setRequestHeader('Content-Type', 'application/json');
+    // Vérifier si le champ de saisie est vide
+    if (valeur === '') {
+        alert('Veuillez saisir une valeur à soummetre');
+        return;
+    }
 
-        const jsonData = JSON.stringify({
-            valeurUser: valeurUser,
-            valeurPsw: valeurPsw
+    const axios = require('axios');
+
+    
+    // Envoi de la requête avec axios
+    axios.post('http://localhost:1234/api/postMessage.php/postMessage', {valeur})
+        .then(function(reponse) {
+
+            const reponse = reponse.data.reponse;
+            if (reponse === 'Success') {
+                getMessage()
+            } else {
+                alert('Erreur lors de l\'appel à l\'API');
+            }
+        })
+        .catch(function(error) {
+            console.error('Erreur lors de la requête:', error);
         });
 
-        requete.onreadystatechange = function () {
-            if (requete.readyState === 4) {
-                if (requete.status === 200) {
-                    const response = JSON.parse(requete.responseText);
-
-                    const elementResultat = document.getElementById('resultat');
-                    if (response['success']) {
-                        // Redirect to the next page if login is successful
-                        window.location.href = 'next_page.html';
-                    } else {
-                        elementResultat.value = 'Erreur lors de l\'authentification';
-                        
-                        // Prevent form submission when login fails
-                        event.preventDefault();
-                    }
-                } else {
-                    console.error('Erreur de la requête: ' + requete.status);
-                }
-            }
-        };
-
-        requete.send(jsonData);
-    });
 });
-*/
+
+
+//end of adding new post to database
+
+
+
+
+
+});
+
+

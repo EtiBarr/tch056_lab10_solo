@@ -354,6 +354,8 @@ body.light #collapseBtn:hover {
     text-align: center;
     margin-right: 8em;
     color: #000000;
+    width: 75vmin;
+    margin-bottom: 5vmin;
 }
 
 .contact-container h2 {
@@ -371,7 +373,8 @@ body.light #collapseBtn:hover {
 }
 
 .form-group input,
-#contactMessage {
+#contactMessage,
+#blogMessage {
     width: 100%;
     padding: 8px;
     border: 1px solid #ccc;
