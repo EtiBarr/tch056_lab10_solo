@@ -1,12 +1,14 @@
 <?php
 
 // Paramètres de connexion à la base de données
-//this works well
-$hostname = "localhost";
-$username = "admin";
-$password = "admin";
+//this works for mac
+$hostname = "127.0.0.1";
+$username = "root";
+$password = "";
 $database = "tch056_projet_integrateur";
+
 try {
+
     // Établir la connexion avec PDO
     $conn = new PDO("mysql:host=$hostname;dbname=$database",
                     $username,
@@ -21,10 +23,6 @@ try {
 }   catch(PDOException $e) {// Arrêter le script si la connexion échoue
     die("Connexion échouée: " . $e->getMessage());
 }
-
-
-
-
 
 ?>
 
